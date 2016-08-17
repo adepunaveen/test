@@ -1,0 +1,105 @@
+<html>
+
+<form>
+
+  <!-- the redirect_to is optional, the form will redirect to the referrer on submission -->
+  <!--<input type='hidden' name='redirect_to' value='<the complete return url e.g. http://fooey.com/thank-you.html>' /> -->
+
+  <!-- all your input fields here.... -->
+  Name  <input type='text' id='name' /><br><br>
+  Ids	<input type='text' id='userids' /><br><br>
+  description	<input type='text' id='description'  /><br><br>
+  count	<input type='number' id='count' min="0" /><br>
+  <br>
+  <br><br>
+  <button id="b1" type="button">Create Group</button>
+  <br><br>
+  <button id="b2" type="button">View Group</button>
+  <br><br>
+  <button id="b3" type="button">Update Group</button>
+  <br><br>
+  <button id="b4" type="button">Delete Group</button>
+  <br><br>
+  <button id="b5" type="button">Create Config</button>
+
+</form>
+
+  <script src="/scripts/jquery-3.1.0.js"></script>
+<script>
+$(document).ready(function(){
+
+    $("#b1").click(function(){
+	alert("saving ");
+	var a = $("#name").val();
+	var b = $("#userids").val();
+	var c = $("#description").val();
+	var d= $("#count").val();
+	  $.post("http://localhost:3000/creategroup",{
+		name: a,
+        userids: b,
+		description : c,
+		count : d
+	   },
+        function(data,status){
+            alert("Data: " + data.code + "\nStatus: " + status);
+        });
+    });
+
+    $("#b2").click(function(){
+	alert("viewing ");
+	var a = $("#name").val();
+	var b = $("#userids").val();
+	var c = $("#description").val();
+	var d= $("#count").val();
+	  $.post("http://localhost:3000/viewgroup",{
+	   },
+        function(data,status){
+			alert(data[0]);
+        });
+    });
+	
+
+
+    $("#b3").click(function(){
+	var a = $("#name").val();
+	var b = $("#userids").val();
+	var c = $("#description").val();
+	var d= $("#count").val();
+	  $.post("http://localhost:3000/updategroup",{
+		name: a,
+        userids: b,
+		description : c,
+		count : d
+	   },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+
+
+	$("#b4").click(function(){
+	  $.post("http://localhost:3000/deletegroup",{
+		id : '57a1977f7c59fc8410079e09'
+	   },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+
+	
+	$("#b5").click(function(){
+	  $.post("http://localhost:3000/createconfig",{
+	   },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+
+	
+});
+
+
+
+
+
+</script>

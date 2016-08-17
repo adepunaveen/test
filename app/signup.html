@@ -1,0 +1,50 @@
+<html>
+
+<form action="store" method="post">
+
+  <!-- the redirect_to is optional, the form will redirect to the referrer on submission -->
+  <!--<input type='hidden' name='redirect_to' value='<the complete return url e.g. http://fooey.com/thank-you.html>' /> -->
+
+  <!-- all your input fields here.... -->
+  <input type='text' id='name' name='name' />
+  <input type='password' id='password' />
+
+  <input type='submit' value='Test form' />
+  <button id="b1" type="button" onclick="store()">Request data</button>
+
+</form>
+
+  <script src="/scripts/jquery-3.1.0.js"></script>
+<script>
+$(document).ready(function(){
+    $("#b1").click(function(){
+	var a = $("#name").val();
+	var b = $("#password").val();
+	  $.post("http://192.168.1.131:3000/store",{
+		name: a,
+        password: b
+        },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+});
+</script>
+  
+  <!--   
+<script>
+function store() {
+	var username = document.getElementById("name").value;
+	var password = document.getElementById("password").value;
+	var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      document.getElementById("demo").innerHTML = xhttp.responseText;
+    }
+  };
+  xhttp.open("Post", "http://localhost:3000/store", true);
+  xhttp.send("name="+username+"&password="+password);
+}
+</script>	
+--> 
+</html>

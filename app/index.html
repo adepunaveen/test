@@ -1,0 +1,81 @@
+<html>
+
+<form action="store" method="post">
+
+  <!-- the redirect_to is optional, the form will redirect to the referrer on submission -->
+  <!--<input type='hidden' name='redirect_to' value='<the complete return url e.g. http://fooey.com/thank-you.html>' /> -->
+
+  <!-- all your input fields here.... -->
+  <input type='text' id='name' name='uname' />
+  <input type='password' id='upassword' />
+
+  <input type='submit' value='Test form' />
+  <button id="b1" type="button">Request data</button>
+  <button id="b2" type="button">Book Hall</button>
+
+</form>
+
+  <script src="/scripts/jquery-3.1.0.js"></script>
+<script>
+$(document).ready(function(){
+    $("#b1").click(function(){
+	var a = $("#name").val();
+	var b = $("#upassword").val();
+	  $.post("http://192.168.1.131:3000/signin",{
+		name: a,
+        password: b
+        },
+        function(data,status){
+console.log(JSON.stringify(data));
+		if(data.length > 0){
+				alert("login pass");
+			}
+		else{
+			alert("login failure");
+		}
+			
+        });
+    });
+	
+	
+	    $("#b2").click(function(){
+	var a = $("#name").val();
+	var b = $("#upassword").val();
+	  $.post("http://192.168.110.154:3000/testing",{
+		name: a,
+        password: b
+        },
+        function(data,status){
+console.log(JSON.stringify(data));
+		if(data.length > 0){
+				alert("login pass");
+			}
+		else{
+			alert("login failure");
+		}
+			
+        });
+    });
+
+	
+	
+});
+</script>
+  
+  <!--   
+<script>
+function store() {
+	var username = document.getElementById("name").value;
+	var password = document.getElementById("password").value;
+	var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      document.getElementById("demo").innerHTML = xhttp.responseText;
+    }
+  };
+  xhttp.open("Post", "http://localhost:3000/store", true);
+  xhttp.send("name="+username+"&password="+password);
+}
+</script>	
+--> 
+</html>
